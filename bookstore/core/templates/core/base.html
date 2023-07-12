@@ -9,8 +9,112 @@
 </head>
 
 <body>
-    <h1>Hello</h1>
+    <nav class="border-b fixed z-10 top-0 w-full bg-gray-50 border-gray-300">
+        <div class="max-w-6xl mx-auto py-2 px-6 xl:px-0 flex items-center justify-between">
+            <div class="menu-left flex  items-center space-x-6">
+                <a href="{% url 'home' %}"
+                    class="px-3 py-3 text-lg text-[#e67e22] rounded-full  hover:bg-[#e7e7e7] duration-150  "><svg
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </a>
+                <ul class="flex  items-center space-x-10">
+                    <li><a href="{% url 'shop' %}"
+                            class="text-xl font-semibold  text-gray-600 hover:border-b-[2px] hover:border-[#e67e22] transition-colors duration-300 ">Shop</a>
+                    </li>
+                    <li><a href="#"
+                            class="text-xl font-semibold  text-gray-600 hover:border-b-[2px] hover:border-[#e67e22] transition-colors duration-300 ">About
+                            us</a>
+                    </li>
+                </ul>
 
+            </div>
+            <div class="search-bar bg-gray-100 rounded-xl">
+                <form method="GET" action=".">
+                    <div class="flex">
+                        <input type="text" name="query"
+                            class="pl-6 rounded-xl bg-gray-100 placeholder:text-gray-600 placeholder:font-semibold"
+                            placeholder="Search...">
+
+                        <button class="p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-7 h-7">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="menu-right flex items-center  space-x-10">
+                <div class="cart px-3 py-3 rounded-full hover:bg-[#e7e7e7]">
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+
+                    </a>
+                </div>
+                <div>
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}"
+                        class="px-5 py-3 rounded-3xl text-white hover:bg-[#e67e22] bg-[#e99041]">Logout</a>
+                    {% else %}
+                    <a href="{% url 'login' %}"
+                        class="px-5 py-3 rounded-3xl text-white hover:bg-[#e67e22] bg-[#e99041]">Login</a>
+
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+    </nav>
+
+    <main>
+        <div class="container pt-14 pb-16 mb-10">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="  fixed bottom-0 w-full  pb-2  bg-gray-100 ">
+        <div class="max-w-6xl mx-auto py-6 px-6 xl:px-0 text-center">
+            <span class="mb-5 text-lg text-gray-700 ">Copyright &copy; 2023 by Pradeep. All rights reserved</span>
+
+            <div class=" w-full mx-auto flex justify-center space-x-12 px-4 pt-6">
+                <span class="text-[#3b5998]"><a href="https://www.facebook.com/" class="hover:text-[#2d4373]"><ion-icon
+                            class="h-6 w-6" name="logo-facebook"></ion-icon></a></ion-icon></span>
+                <span class="text-[#c32aa3]"><a href="https://www.instagram.com/" class="hover:text-[#8b1e74]"><ion-icon
+                            class="h-6 w-6" name="logo-instagram"></ion-icon></a></span>
+                <span class="text-[#1da1f2]"><a href="https://twitter.com/home" class="hover:text-[#0b7bc0]"><ion-icon
+                            class="h-6 w-6" name="logo-twitter"></ion-icon></a></span>
+                <span class="text-[#0a66c2]"><a href="https://linkedin.com/" class="hover:text-[#084c91]"><ion-icon
+                            class="h-6 w-6" name="logo-linkedin"></ion-icon></a></span>
+                <span class="text-[#5865f2]"><a href="https://discord.com/" class="hover:text-[#192bed]"><ion-icon
+                            class="h-6 w-6" name="logo-discord"></ion-icon></a></span>
+            </div>
+
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
+
+
+<!-- color code
+    light - #eb9950
+middle - #e67e22
+dark - #dd751a
+more - #b05d14
+-->
