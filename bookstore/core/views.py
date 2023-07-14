@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import redirect, render
 
 from .forms import SignupForm
-from .models import Book
+from .models import Book, Category
 
 
 # Create your views here.
@@ -17,6 +18,12 @@ def home(request):
 
 def shop(request):
     books = Book.objects.all()
+
+    query = request.GET.get("query", "")
+    if query:
+        books = Book.objects.filter(
+            Q(title__icontains=query) | Q(categories__name__icontains=query)
+        ).distinct()
     context = {"books": books}
     return render(request, "core/shop.html", context)
 
@@ -70,3 +77,22 @@ def signupView(request):
             form = SignupForm()
 
     return render(request, "core/signup.html")
+
+
+@login_required(login_url="login")
+def myaccount(request):
+    return render(request, "core/myaccount.html")
+
+
+@login_required(login_url="login")
+def edit_myaccount(request):
+    if request.method == "POST":
+        user = request.user
+        user.first_name = request.POST.get("first_name")
+        user.last_name = request.POST.get("last_name")
+        user.username = request.POST.get("username")
+        user.email = request.POST.get("email")
+        user.save()
+
+        return redirect("myaccount")
+    return render(request, "core/edit_myaccount.html")
