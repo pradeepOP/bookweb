@@ -11,4 +11,5 @@ urlpatterns = [
     path("signup/", views.signupView, name="signup"),
     path("myaccount/", views.myaccount, name="myaccount"),
     path("myaccount/edit/", views.edit_myaccount, name="edit_myaccount"),
+    path("about/", views.about, name="about"),
 ]

@@ -96,3 +96,7 @@ def edit_myaccount(request):
 
         return redirect("myaccount")
     return render(request, "core/edit_myaccount.html")
+
+
+def about(request):
+    return render(request, "core/about.html")
