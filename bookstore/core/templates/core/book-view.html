@@ -6,7 +6,8 @@
             <img src="{{book.cover_image.url}}" class="w-[300px] h-[400px] " alt="">
             <div class="button mt-4 pt-2 pl-16 ">
                 <a href=""
-                    class="px-6 py-3  rounded-3xl bg-white border-[2px]  text-[#e67e22] hover:text-white border-[#e67e22]  hover:bg-[#e67e22] duration-150">Add
+                    class="px-6 py-3  rounded-3xl bg-white border-[2px]  text-[#e67e22] hover:text-white border-[#e67e22]  hover:bg-[#e67e22] duration-150"
+                    hx-get="{% url 'add_to_cart' book.id %}" hx-target="#menu-cart-button" hx-swap="outerHTML">Add
                     to cart</a>
             </div>
         </div>
